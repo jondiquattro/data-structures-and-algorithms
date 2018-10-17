@@ -62,13 +62,13 @@ Then, write a function named removeElements that takes in an array and a callbac
 Return the modified array.
 ------------------------------------------------------------------------------------------------ */
 
+
+
 const removeOne = (num, arr) => {
   if(num%3 ===2){
     arr.pop();
   }
 }
-
-
 const removeElements = (arr, removeOne) => {
   for(let i = 0; i<arr.length; i++){
     removeOne(arr[i], arr);
@@ -81,8 +81,9 @@ CHALLENGE 4
 Write a function named removeWithForEach that produces the same output as challenge 3, but uses forEach.
 ------------------------------------------------------------------------------------------------ */
 
-const removeWithForEach = (arr, callback) => {
-  // Solution code here...
+const removeWithForEach = (arr, removeOne) => {
+  arr.forEach(removeOne(num));
+  return arr;
 }
 
 /* ------------------------------------------------------------------------------------------------
@@ -98,7 +99,7 @@ const removeWithAnon = (arr) => {
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 6
-Write a function named createList that takes in an array of the current store intentory.
+Write a function named createList that takes in an array of the current store inventory.
 The inventory is formatted like this:
 [
   { name: 'apples', available: true },
@@ -110,8 +111,19 @@ The inventory is formatted like this:
 This function should use forEach to populate your grocery list based on the store's inventory. If the item is available, add it to your list. Return the final list.
 ------------------------------------------------------------------------------------------------ */
 
-const createList = (availableItems) => {
-  // Solution code here...
+// const createList = (availableItems) => {
+//   // Solution code here...
+// }
+const createList = (items) => {
+  items.forEach(myFunction);
+}
+
+function myFunction(item) {
+  // const inventory=[];
+if(item.available === true){
+  inventory.push(item.name);
+}
+return inventory;
 }
 
 /* ------------------------------------------------------------------------------------------------
@@ -136,20 +148,20 @@ DO NOT CHANGE any of the below code.
 Run your tests from the console: jest challenges-01.test.js
 ------------------------------------------------------------------------------------------------ */
 
-describe('Testing challenge 1', () => {
+xdescribe('Testing challenge 1', () => {
   test('It should return the message with all uppercase characters', () => {
     expect(speaker('hello 301 students!', greeting)).toStrictEqual('HELLO 301 STUDENTS!');
   });
 });
 
-describe('Testing challenge 2', () => {
+xdescribe('Testing challenge 2', () => {
   test('It should add the number 8 to the array five times', () => {
     expect(addNumbers(8, [], 5, addValues)).toStrictEqual([8, 8, 8, 8, 8]);
     expect(addNumbers(8, [], 5, addValues).length).toStrictEqual(5);
   });
 });
 
-describe('Testing challenge 3', () => {
+xdescribe('Testing challenge 3', () => {
   test('It should remove three elements from the array', () => {
     expect(removeElements([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], removeOne)).toStrictEqual([1, 2, 3, 4, 5, 6, 7]);
     expect(removeElements([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], removeOne).length).toStrictEqual(7);
@@ -170,7 +182,7 @@ xdescribe('Testing challenge 5', () => {
   });
 });
 
-xdescribe('Testing challenge 6', () => {
+describe('Testing challenge 6', () => {
   const inventory = [{ name: 'apples', available: true }, { name: 'pears', available: true }, { name: 'oranges', available: false }, { name: 'bananas', available: true }, { name: 'blueberries', available: false }];
 
   test('It should only add the available items to the list', () => {
