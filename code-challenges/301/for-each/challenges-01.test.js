@@ -82,7 +82,11 @@ Write a function named removeWithForEach that produces the same output as challe
 ------------------------------------------------------------------------------------------------ */
 
 const removeWithForEach = (arr, removeOne) => {
-  arr.forEach(removeOne(num));
+  arr.forEach( (num) => {
+    if(num%3 ===2){
+      arr.pop();
+    }
+  });
   return arr;
 }
 
@@ -94,7 +98,12 @@ This anonymous function should accept up to three arguments: the element, the in
 ------------------------------------------------------------------------------------------------ */
 
 const removeWithAnon = (arr) => {
-  // Solution code here...
+  arr.forEach( (fun)=> {
+    if(fun%3 ===2){
+      arr.pop();
+    }
+  });
+  return arr;
 }
 
 /* ------------------------------------------------------------------------------------------------
@@ -111,20 +120,18 @@ The inventory is formatted like this:
 This function should use forEach to populate your grocery list based on the store's inventory. If the item is available, add it to your list. Return the final list.
 ------------------------------------------------------------------------------------------------ */
 
-// const createList = (availableItems) => {
-//   // Solution code here...
-// }
-const createList = (items) => {
-  items.forEach(myFunction);
+const createList = (obj) => {
+  // Solution code here...
+  const list =[];
+
+  obj.forEach((ele)=>{
+    if(ele.available ===true){
+      list.push(ele.name);
+    }
+  })
+  return list;
 }
 
-function myFunction(item) {
-  // const inventory=[];
-if(item.available === true){
-  inventory.push(item.name);
-}
-return inventory;
-}
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 7
@@ -139,7 +146,26 @@ Return the resulting output array.
 
 const fizzbuzz = (arr) => {
   // Solution code here...
+  const output=[];
+  arr.forEach((arr)=>{
+    
+    if((arr%3===0) && !(arr%5===0)){
+      output.push('Fizz');
+      }
+    else if(arr%5 ===0){
+      output.push('Buzz');
+    }
+    else if((arr%5===0) ||(arr%3===0)){
+      output.push("Fizz Buzz");
+    }
+    else{
+      output.push(arr);
+    }
+  })
+  return output;
 }
+
+
 
 /* ------------------------------------------------------------------------------------------------
 TESTS
@@ -182,7 +208,7 @@ xdescribe('Testing challenge 5', () => {
   });
 });
 
-describe('Testing challenge 6', () => {
+xdescribe('Testing challenge 6', () => {
   const inventory = [{ name: 'apples', available: true }, { name: 'pears', available: true }, { name: 'oranges', available: false }, { name: 'bananas', available: true }, { name: 'blueberries', available: false }];
 
   test('It should only add the available items to the list', () => {
@@ -191,7 +217,7 @@ describe('Testing challenge 6', () => {
   });
 });
 
-xdescribe('Testing challenge 7', () => {
+describe('Testing challenge 7', () => {
   const inputs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
 
   test('It should print out messages or numbers', () => {
