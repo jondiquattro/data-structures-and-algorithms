@@ -25,7 +25,6 @@ const isNum = (input) => {
   else if(testNum ==false) {
     flag = false;
   }
-  console.log(flag);
   return flag;
 
 };
@@ -47,11 +46,8 @@ const isCapitalized = (str) => {
 
   let flag = false;
 
-//  console.log(testStr);
-  //  console.log(str.match(capRegex));
-   
    const arr=str.match(capRegex); 
-   console.log(arr);
+
 
   return arr;
   
@@ -83,7 +79,28 @@ Do not use the vertical bar (pipe) in your pattern.
 ------------------------------------------------------------------------------------------------ */
 
 const matchMonth = (input) => {
-  input.toLower();
+  let reg = /oct/;
+  let num = /[0-9]/;
+  let long = /october/;
+  let caps =/[A-Z]/;
+  
+
+  if(num.test(input)|| caps.test(input[1])){
+    return false;
+  }
+  else if(long.test(input.toLowerCase()) && (input.length < 8)){
+  
+      return true;
+    
+    }
+  else if ((reg.test(input.toLowerCase())) && (input.length<4)  ){
+    return true;
+  }
+
+  else{
+    return false;
+  }
+
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -94,7 +111,15 @@ The expected output of "Hello, and have a wonderful day!" is ["and ", "have ", "
 ------------------------------------------------------------------------------------------------ */
 
 const noPunctuation = str => {
-  // Solution code here...
+ let result = [];
+ let x = str.split(/\s/);
+
+ x.forEach( idx =>{
+   if(/[a-z]|[A-Z]/.test(idx[idx.length -1])){
+    result.push(idx + ' ')
+   }
+ })
+ return result;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -106,7 +131,7 @@ For example, 'Welcome to Code 301!' will return 'W_lc_m_ t_ C_d_ 301!'.
 ------------------------------------------------------------------------------------------------ */
 
 let hangman = (str) => {
-  // Solution code here...
+ return str.replace(/[aeiouAEIOU]/g, '_')
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -119,7 +144,13 @@ Hint: All of these words end with the letters "ells".
 const seashells = 'She sells seashells by the seashore. The shells she sells are surely seashells. So if she sells shells on the seashore, I\'m sure she sells seashore shells.';
 
 const findShells = (str) => {
-  // Solution code here...
+  const result = [];
+ str.split(/\s/).forEach(idx=>{
+   if(/ells/.test(idx)){
+     result.push(idx.replace(/\W/, ''))
+   }
+ })
+  return result;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -129,7 +160,7 @@ DO NOT CHANGE any of the below code.
 Run your tests from the console: jest challenges-04.solution.test.js
 ------------------------------------------------------------------------------------------------ */
 
-xdescribe('Testing challenge 1', () => {
+describe('Testing challenge 1', () => {
   test('It should return true if the input is a number', () => {
     expect(isNum(1234567890)).toBeTruthy();
     expect(isNum('12345')).toBeTruthy();
@@ -143,7 +174,7 @@ xdescribe('Testing challenge 1', () => {
   });
 });
 
-xdescribe('Testing challenge 2', () => {
+describe('Testing challenge 2', () => {
   test('It should only return words that begin with a capital letter', () => {
     const capitalResult = isCapitalized('We only want to Return the Words that begin With a capital Letter');
 
@@ -165,7 +196,7 @@ describe('Testing challenge 3', () => {
   });
 });
 
-xdescribe('Testing challenge 4', () => {
+describe('Testing challenge 4', () => {
   test('It should match any of the acceptable inputs', () => {
     expect(matchMonth('Oct')).toBeTruthy();
     expect(matchMonth('oct')).toBeTruthy();
@@ -183,7 +214,7 @@ xdescribe('Testing challenge 4', () => {
   });
 });
 
-xdescribe('Testing challenge 5', () => {
+describe('Testing challenge 5', () => {
   const lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras lacinia vel massa sed egestas. Nunc faucibus iaculis elit, a scelerisque enim condimentum sed. Aenean ac scelerisque sem, et pharetra diam.';
 
   test('It should only return words that are immediately followed by a space', () => {
@@ -196,7 +227,7 @@ xdescribe('Testing challenge 5', () => {
   });
 });
 
-xdescribe('Testing challenge 6', () => {
+describe('Testing challenge 6', () => {
   let startString = 'This is a regex challenge. We are trying to create a hangman phrase where all of the vowels are missing!';
 
   test('It should remove the vowels from the hangman string and replace them with underscores', () => {
@@ -208,7 +239,7 @@ xdescribe('Testing challenge 6', () => {
   });
 });
 
-xdescribe('Testing challenge 7', () => {
+describe('Testing challenge 7', () => {
   test('It should return an array of instances of "sells", shells", and "seashells"', () => {
     expect(findShells(seashells)).toStrictEqual(['sells', 'seashells', 'shells', 'sells', 'seashells', 'sells', 'shells', 'sells', 'shells']);
     expect(findShells(seashells).length).toStrictEqual(9);
