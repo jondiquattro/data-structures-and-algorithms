@@ -171,29 +171,17 @@ const deceasedSpouses = ['Catelyn', 'Lysa', 'Robert', 'Khal Drogo', 'Alerie'];
 
 const houseSurvivors = (arr) => {
   const survivors = [];
-  let alive = true;
 
+  arr.forEach( index => {
+  if ((index.spouse === null) || (deceasedSpouses.includes(index.spouse))){
+    survivors.push({  house:  index.house, members: (1+index.children.length)})
+  }
+  else{
+    survivors.push({  house:  index.house, members: (2+index.children.length)})
+  
+  }
+  });
 
-  arr.forEach( house => {//outer loop
-    
-
-    deceasedSpouses.forEach( spouse=>{
-      // alive = true;
-      if(house.spouse === spouse){
-        alive ===false;
-        
-      }
-
-    })//end inner loop
-if ((house.spouse === null) || (alive ===false)){
-  survivors.push({  house:  house.house, members: (1+house.children.length)})
-}
-else{
-  survivors.push({  house:  house.house, members: (2+house.children.length)})
-
-}
-
-    });
   return survivors;
 }
 
