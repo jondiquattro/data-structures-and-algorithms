@@ -82,7 +82,11 @@ Write a function named removeWithForEach that produces the same output as challe
 ------------------------------------------------------------------------------------------------ */
 
 const removeWithForEach = (arr, removeOne) => {
-  arr.forEach(removeOne(num));
+  arr.forEach( (num) => {
+    if(num%3 ===2){
+      arr.pop();
+    }
+  });
   return arr;
 }
 
@@ -94,7 +98,12 @@ This anonymous function should accept up to three arguments: the element, the in
 ------------------------------------------------------------------------------------------------ */
 
 const removeWithAnon = (arr) => {
-  // Solution code here...
+  arr.forEach( (fun)=> {
+    if(fun%3 ===2){
+      arr.pop();
+    }
+  });
+  return arr;
 }
 
 /* ------------------------------------------------------------------------------------------------
@@ -111,20 +120,18 @@ The inventory is formatted like this:
 This function should use forEach to populate your grocery list based on the store's inventory. If the item is available, add it to your list. Return the final list.
 ------------------------------------------------------------------------------------------------ */
 
-// const createList = (availableItems) => {
-//   // Solution code here...
-// }
-const createList = (items) => {
-  items.forEach(myFunction);
+const createList = (obj) => {
+  // Solution code here...
+  const list =[];
+
+  obj.forEach((ele)=>{
+    if(ele.available ===true){
+      list.push(ele.name);
+    }
+  })
+  return list;
 }
 
-function myFunction(item) {
-  // const inventory=[];
-if(item.available === true){
-  inventory.push(item.name);
-}
-return inventory;
-}
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 7
@@ -138,8 +145,25 @@ Return the resulting output array.
 ------------------------------------------------------------------------------------------------ */
 
 const fizzbuzz = (arr) => {
-  // Solution code here...
+  const result =[];
+  arr.forEach(idx=>{
+    if((idx%5===0)&&(idx%3===0)){
+      result.push('Fizz Buzz')
+    }
+    else if(idx%3===0){
+      result.push('Fizz')
+    }
+    else if(idx%5===0){
+      result.push('Buzz')
+    }
+    else{
+      result.push(idx);
+    }
+  })
+  return result;
 }
+
+
 
 /* ------------------------------------------------------------------------------------------------
 TESTS
@@ -148,34 +172,34 @@ DO NOT CHANGE any of the below code.
 Run your tests from the console: jest challenges-01.test.js
 ------------------------------------------------------------------------------------------------ */
 
-xdescribe('Testing challenge 1', () => {
+describe('Testing challenge 1', () => {
   test('It should return the message with all uppercase characters', () => {
     expect(speaker('hello 301 students!', greeting)).toStrictEqual('HELLO 301 STUDENTS!');
   });
 });
 
-xdescribe('Testing challenge 2', () => {
+describe('Testing challenge 2', () => {
   test('It should add the number 8 to the array five times', () => {
     expect(addNumbers(8, [], 5, addValues)).toStrictEqual([8, 8, 8, 8, 8]);
     expect(addNumbers(8, [], 5, addValues).length).toStrictEqual(5);
   });
 });
 
-xdescribe('Testing challenge 3', () => {
+describe('Testing challenge 3', () => {
   test('It should remove three elements from the array', () => {
     expect(removeElements([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], removeOne)).toStrictEqual([1, 2, 3, 4, 5, 6, 7]);
     expect(removeElements([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], removeOne).length).toStrictEqual(7);
   });
 });
 
-xdescribe('Testing challenge 4', () => {
+describe('Testing challenge 4', () => {
   test('It should remove three elements from the array', () => {
     expect(removeWithForEach([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], removeOne)).toStrictEqual([1, 2, 3, 4, 5, 6, 7]);
     expect(removeWithForEach([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], removeOne).length).toStrictEqual(7);
   });
 });
 
-xdescribe('Testing challenge 5', () => {
+describe('Testing challenge 5', () => {
   test('It should remove three elements from the array', () => {
     expect(removeWithAnon([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])).toStrictEqual([1, 2, 3, 4, 5, 6, 7]);
     expect(removeWithAnon([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]).length).toStrictEqual(7);
@@ -191,11 +215,11 @@ describe('Testing challenge 6', () => {
   });
 });
 
-xdescribe('Testing challenge 7', () => {
+describe('Testing challenge 7', () => {
   const inputs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
 
   test('It should print out messages or numbers', () => {
     expect(fizzbuzz(inputs)).toStrictEqual([1, 2, 'Fizz', 4, 'Buzz', 'Fizz', 7, 8, 'Fizz', 'Buzz', 11, 'Fizz', 13, 14, 'Fizz Buzz', 16]);
     expect(fizzbuzz(inputs).length).toStrictEqual(16);
-  });
+  });jest
 });
