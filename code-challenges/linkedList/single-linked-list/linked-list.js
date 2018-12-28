@@ -1,5 +1,9 @@
 const util = require('util');
 
+// module.exports = {Node, LinkedList};
+
+
+console.log('hooked up')
 class Node {
     constructor(value){
 
@@ -58,6 +62,27 @@ class LinkedList{
             current = current.next;
         }
     }
+
+    // append(value){
+
+    // }
+    insertBefore(value, newValue){
+        let current = this.head;
+        while(current.next!== null){
+            if(current.next.value === value){
+                break;
+            }
+            if(current.next ===null){
+                console.log('value not found')
+            }
+            else{
+                let newNode = new Node(newValue);
+                newNode.next = current.next;
+                current.next = newNode;
+            }
+        }
+    }
+
 }
 
 let list = new LinkedList();
@@ -67,6 +92,9 @@ list.add('Zach');
 list.add(4);
 list.insert('John');
 console.log(list.includes('John'));
+list.insertBefore('cathy', 7)
 list.print();
 
 console.log(util.inspect(list,{depth:10}));
+
+

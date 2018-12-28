@@ -1,4 +1,4 @@
-const search = require('./Array/__test__/array-Binary-Search.js');
+const search = require('../array_shift/array-shift.js');
 
 it('can take a sorted array and return the index on a target match', ()=>{
     
