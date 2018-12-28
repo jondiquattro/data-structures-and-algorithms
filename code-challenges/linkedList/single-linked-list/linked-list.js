@@ -63,16 +63,47 @@ class LinkedList{
         }
     }
 
-    // append(value){
-
-    // }
-    insertBefore(value, newValue){
+    append(value){
         let current = this.head;
-        while(current.next!== null){
-            if(current.next.value === value){
+        while(current.next){
+            current = current.next;
+        }
+        let newNode = new Node(value)
+        current.next = newNode;
+        newNode.next = null;
+
+    }
+    insertAfter(value, newValue){
+        let current = this.head;
+        while(current.next){
+          
+            if(current.value === value){
+            //   console.log('entered')
                 break;
             }
-            if(current.next ===null){
+            current = current.next;
+        }
+        if(current.next ===null){
+            console.log('value not found')
+        }
+        else{
+            let newNode = new Node(newValue);
+            newNode.next = current.next;
+            current.next = newNode;
+        }
+
+    }
+    insertBefore(value, newValue){
+        let current = this.head;
+        while(current.next){
+          
+            if(current.next.value === value){
+              console.log('entered')
+                break;
+            }
+            current = current.next;
+        }
+        if(current.next ===null){
                 console.log('value not found')
             }
             else{
@@ -80,7 +111,6 @@ class LinkedList{
                 newNode.next = current.next;
                 current.next = newNode;
             }
-        }
     }
 
 }
@@ -90,11 +120,8 @@ list.add('James');
 list.add('cathy');
 list.add('Zach');
 list.add(4);
-list.insert('John');
-console.log(list.includes('John'));
-list.insertBefore('cathy', 7)
+list.insertAfter('cathy','rob');
+// console.log(list.includes('John'));
+// list.insertBefore('cathy', 7)
+list.append(7);
 list.print();
-
-console.log(util.inspect(list,{depth:10}));
-
-

@@ -10,4 +10,4 @@ space complexity is O(1)
 time complexity is O(n) n being the size of the array.
 
 ## Solution
-![(../assets/array_binary_search)]
+![(../../assets/array_binary_search)]
