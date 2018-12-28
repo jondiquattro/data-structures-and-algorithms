@@ -10,3 +10,5 @@ Our approach was to use a while loop with two functions, a bottomSearch and a to
 Space is O(1), while time complexity is O log(n) since we ar only searching half the array each time.
 
 ## Solution
+![Image of Yaktocat]
+(../../assets/array_shift.png)
