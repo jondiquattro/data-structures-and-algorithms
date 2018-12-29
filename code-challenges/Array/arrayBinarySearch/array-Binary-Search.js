@@ -1,4 +1,5 @@
-
+'use strict'
+console.log('being called by test')
 
 function binarySearch(arr, key){
   let count = 0;

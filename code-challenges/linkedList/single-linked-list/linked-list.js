@@ -43,12 +43,12 @@ class LinkedList{
         let value = current.value;
         while(current.next){
             if(target === value){
-                target = true;
+                // target = true;
                 break;
             }
             current = current.next;
         }
-        if(target ===true){
+        if(target ===value){
             return true;
         }
         else{
@@ -112,16 +112,35 @@ class LinkedList{
                 current.next = newNode;
             }
     }
-
+    getValue(k){
+        let current = this.head;
+        let length = 0;
+        while(current.next){
+            length ++;
+            current = current.next;
+        };
+        let target = length - k;
+        current = this.head;
+        let cnt = 0;
+        while(cnt < target){
+            current = current.next;
+            cnt ++;
+        }
+        return current.next.value
+    }
 }
 
 let list = new LinkedList();
 list.add('James');
 list.add('cathy');
 list.add('Zach');
-list.add(4);
-list.insertAfter('cathy','rob');
+list.add('3');
+list.add(5);
+
+console.log(list.getValue(3));
+
 // console.log(list.includes('John'));
 // list.insertBefore('cathy', 7)
-list.append(7);
-list.print();
+    console.log(list);
+
+    module.exports = {LinkedList,Node};
