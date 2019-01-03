@@ -1,22 +1,27 @@
 'use strict'
-console.log('being called by test')
+ //12
 
 function binarySearch(arr, key){
   let count = 0;
-  let midIdx = Math.floor(arr.length/2);
+  let midIdx = Math.floor(arr.length/2); //3
 
-  let botMid = function (midIdx){
+  let botMid = function (val){
     midIdx = Math.floor(midIdx/2)
+    return midIdx;
+
   }
 
-  let topMid = function(midIdx){
-    midIdx=midIdx(Math.floor((arr.length - midIdx)/2))
+  let topMid = function(val){
+    midIdx = midIdx +Math.floor(((arr.length-1) - midIdx)/2)
+    return midIdx
+
   }
 
-  while(key !==arr[midIdx]){
-    console.log('count ', count)
+  while( (count < Math.floor(arr.length/2)) ){
+    count ++;
     if (key ===arr[midIdx] || key === arr[midIdx + 1]){
-      return midIdx;
+      if(key === arr[midIdx]){return midIdx}
+      else{ return midIdx+1 }
     }
     else if(key<arr[midIdx]) {
       botMid(midIdx)
@@ -25,12 +30,8 @@ function binarySearch(arr, key){
       topMid(midIdx)
     }
     else {return -1}
-    count ++;
-    if(count > arr.length/2){
-      return -1
-      break;
-      
-    }
-    
+
   }
 }
+
+module.exports = {binarySearch};
