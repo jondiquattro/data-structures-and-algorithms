@@ -13,12 +13,10 @@ class Node {
 }
 
 
-
 class LinkedList{
     constructor(){
         this.head = null;
     }
-
     add(value){
         let node = new Node(value);
 
@@ -29,7 +27,7 @@ class LinkedList{
 
         let current = this.head;
         while(current.next){
-        
+            //do stuff
             current = current.next;
         }
         current.next = node;
@@ -133,16 +131,58 @@ class LinkedList{
 }
 
 let list = new LinkedList();
-list.add('James');
-list.add('cathy');
-list.add('Zach');
-list.add('3');
-list.add(5);
+list.add('r');
+list.add('a');
+list.add('c');
+list.add('e');
+list.add('c');
+list.add('a');
+list.add('r');
 
-console.log(list.getValue(3));
+function valPal(list1){
+    let cur = list1.head;
+    let count = 0;
+    let arr =[];
+    let result = true;
+   
+    while(cur.next){
+        // console.log(cur.value)
+        arr[count] = cur.value;
+        count ++;
+        cur=cur.next;
+    }
+    let len = count+1;
+    arr[count]=cur.value;
 
-// console.log(list.includes('John'));
-// list.insertBefore('cathy', 7)
-    console.log(list);
+    // console.log(len%2)
 
-    module.exports = {LinkedList,Node};
+    if(len%2 == 0){
+        for(let i =0; i<len/2; i++){
+            console.log(arr[i])
+
+            if(arr[i] !== arr[(len-1)-i]){
+                
+                result = false;
+            }
+
+
+        }
+    }
+    else if(len%2 !== 0){
+        for(let i =0; i<Math.floor(len/2); i++){
+
+            if(arr[i] !== arr[(len-1)-i]){
+                console.log(arr[i])
+                result= false;
+            }
+
+        }
+    }
+return result;
+    
+}
+
+
+let x =valPal(list)
+
+    console.log(x);
