@@ -15,66 +15,64 @@ class Stack{
 constructor (node){
   this.top = null;
   this.count = 0;
-
+  this.current = null;
 }
 
 push(value){
   //if top is null current node is top
   let node = new Node(value)
-    let top = null;
-  if(!this.top){
-    this.top= node;
-    top = this.top;
-    this.count ++;
+  
+  if(!this.front){
+    this.front= node;
+    this.current = node;
+    this.front.prev = this.current;
+
     return;
   }
-  let last = node;
-  last.prev = top;
-  top = last;
-  this.count++;
-//   console.log({prev: top.prev.value})
-}
-
-pop(){
-    let off = this.top;
-    this.top = this.top.prev;
-
-  this.count --;
+  let prevNode = node;
+  this.current.prev = node;
+  this.current = prevNode;
+  
+  
+  }
+  
+  pop(){
+  let off = this.front.value;
+  let current = this.front.prev;
+    console.log(off)
+  this.front = current;
   return off;
-
-}
+  
+  }
 peek(){
 //   return {value: this.top.value, length: this.count};
-return this.top.value;
+return this.front.value;
 }
 }
 
 let stack = new Stack();
-// stack.push(1);
-// console.log(stack.peek());
-
-// stack.push(2);
-// stack.push(3);
-// stack.push(4);
-// stack.push(5);
-// console.log(stack.top.prev)
-// console.log(stack.peek());
-// stack.pop();
-// stack.pop();
-// // stack.push(8)
-// console.log(stack.peek());
 
 for(let i = 1; i <=5; i++){
 stack.push(i);
 // console.log(stack.peek());
 
 }
-console.log(stack.peek());
+// console.log(stack.peek());
 
-
+let newCount = 0;
 while(stack.pop() !==null){
-
-stack.pop();
-console.log(stack.peek());
+newCount ++;
+// stack.pop()
+console.log('count is ' ,newCount)
 
 }
+
+// console.log(stack.pop());s
+// console.log(stack.pop());
+// console.log(stack.pop());
+// console.log(stack.pop());
+// console.log(stack.pop());
+// console.log(stack.pop());
+
+
+
