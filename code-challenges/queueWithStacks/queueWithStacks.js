@@ -9,7 +9,7 @@ class Node {
 
 class Stack{
 constructor (node){
-this.top = null;;
+this.front = null;;
 
 }
 
@@ -17,23 +17,28 @@ push(value){
 //if top is null current node is top
 let node = new Node(value)
 
-if(!this.top){
-  this.top= node;
+if(!this.front){
+  this.front= node;
+  let current = this.front;
   return;
 }
-let current = node;
-node.prev = this.top;//points at top
-this.top = current;
+
+let prevNode = node;
+current.prev = node;
+current = prevNode;
+
+
 }
 
 pop(){
-let last = this.top.value;
-this.top = this.top.prev;
-return last;
+let off = this.top;
+console.log(this.top.prev.value)
+
+return off;
 
 }
 peek(){
-return this.top.value;
+// return this.top.value;
 }
 }
 
