@@ -62,4 +62,28 @@ class BinaryTreeClass{
         _walk(this.root);
         return nodes;
         }
+
+    findMaximumValue(){
+    
+        if(!this.route){return;}
+
+        let max = this.root.value;
+
+        let queue = [];
+
+        queue.push(this.root);
+
+        while(queue.length){
+
+            let node = queue.shift();
+
+            if (max<node.value){
+                max = node.value
+            }
+
+            if(node.left){queue.push(node.left);
+            if(node.right){queue.push(node.right)}}
+        }
+        return max;
+    }
 }
