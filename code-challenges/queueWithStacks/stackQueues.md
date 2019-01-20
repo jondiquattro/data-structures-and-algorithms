@@ -12,3 +12,6 @@ Write a stacks and queues classes with full functionality using linked lists
 ## Approach & Efficiency
 My approach for the stack was to use a prev that every time a new node was created would point at the last node that was created.
 this allowed for a space complexity of O(1) and a time complexity of O(1) for any of the operations.
+
+##Testing
+Testing is complete for each method..
