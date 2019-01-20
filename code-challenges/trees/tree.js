@@ -12,7 +12,7 @@ class Node {
 }
 
 
-class BinaryTreeClass{
+class BinaryTree{
     constructor(){
         this.root = null;//sets root to null
     }
@@ -20,6 +20,7 @@ class BinaryTreeClass{
     preOrder(){
     let nodes = [];
 
+    //takes a node
     let _walk = (node) =>{
 
     nodes.push(node.value);
@@ -27,8 +28,10 @@ class BinaryTreeClass{
     if(node.left){_walk(node.left)}  //if there is a node.left walk left
     if(node.right){_walk(node.right)}//if there is a node.right walk right
     };
-
-    _walk(this.root);
+    //checks for null tree
+    if(this.root !== null){
+        _walk(this.root);
+    }
     return nodes;
     }
 
@@ -43,7 +46,9 @@ class BinaryTreeClass{
         };
 
 
-        _walk(this.root);//calls the walk function so that it runs
+        if(this.root !== null){
+            _walk(this.root);
+        }
         return nodes;  //returns node array
     }
 
@@ -58,32 +63,33 @@ class BinaryTreeClass{
 
         if(node.right){_walk(node.right)}//if there is a node.right walk right
         };
-    
-        _walk(this.root);
+        if(this.root !== null){
+            _walk(this.root);
+        }
         return nodes;
         }
 
-    findMaximumValue(){
+        findMaximumValue(){
     
-        if(!this.route){return;}
-
-        let max = this.root.value;
-
-        let queue = [];
-
-        queue.push(this.root);
-
-        while(queue.length){
-
-            let node = queue.shift();
-
-            if (max<node.value){
-                max = node.value
+            if(!this.route){return;}
+    
+            let max = this.root.value;
+    
+            let queue = [];
+    
+            queue.push(this.root);
+    
+            while(queue.length){
+    
+                let node = queue.shift();
+    
+                if (max<node.value){
+                    max = node.value
+                }
+    
+                if(node.left){queue.push(node.left);
+                if(node.right){queue.push(node.right)}}
             }
-
-            if(node.left){queue.push(node.left);
-            if(node.right){queue.push(node.right)}}
+            return max;
         }
-        return max;
-    }
 }

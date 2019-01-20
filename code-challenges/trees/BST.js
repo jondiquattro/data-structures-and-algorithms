@@ -1,7 +1,5 @@
 'use strict';
 
-
-
 class Node {
     constructor(value){
         this.value =value;
@@ -10,9 +8,10 @@ class Node {
         
     }
 }
+//////////////////////////
+//takes in a tree dummy stop over thinking it!
 
-
-class BinaryTreeClass{
+class BinaryTree{
     constructor(){
         this.root = null;//sets root to null
     }
@@ -20,6 +19,7 @@ class BinaryTreeClass{
     preOrder(){
     let nodes = [];
 
+    //takes a node
     let _walk = (node) =>{
 
     nodes.push(node.value);
@@ -27,8 +27,10 @@ class BinaryTreeClass{
     if(node.left){_walk(node.left)}  //if there is a node.left walk left
     if(node.right){_walk(node.right)}//if there is a node.right walk right
     };
-
-    _walk(this.root);
+    //checks for null tree
+    if(this.root !== null){
+        _walk(this.root);
+    }
     return nodes;
     }
 
@@ -43,7 +45,9 @@ class BinaryTreeClass{
         };
 
 
-        _walk(this.root);//calls the walk function so that it runs
+        if(this.root !== null){
+            _walk(this.root);
+        }
         return nodes;  //returns node array
     }
 
@@ -58,27 +62,64 @@ class BinaryTreeClass{
 
         if(node.right){_walk(node.right)}//if there is a node.right walk right
         };
-    
-        _walk(this.root);
+        if(this.root !== null){
+            _walk(this.root);
+        }
         return nodes;
         }
+}
 
-    breadthFirst(tree){
 
-        let queue = [];
-        queue.push(tree.root);
+//////////////////////////
+//takes in a tree dummy stop over thinking it!
 
-        while(queue.length){
-            console.log(queue[queue.length]);
-            let current =queue.shift();
-            if(current.left){
-            queue.push(current.left);
+
+//add should take a node and insert it into the tree
+class BinarySearchTree{
+    constructor(value){
+    this.root = null;
+    this.value = null;
+    }
+
+    add(value){
+        //create a node with the value
+        this.value = value;
+        // find the next logical place for the node
+        let _walk = (node) =>{
+            
+
+            if(this.value < node.value){
+
+                if(node.left){_walk(node.left)} 
+
+                else if (!node.left){
+                    node.left = new Node(this.value);
+                }
+            }
+            if(this.value > node.value){
+                if(node.right){_walk(node.right)}
+                //after recursion is over
+                else if (!node.right){
+                    node.right = new Node(this.value);
+                }
 
             }
-            if(current.right){
-                queue.push(current.right);
 
-            }
+        };
+        //if tree is not empty
+        if (this.root){
+            _walk(this.root);
+        }
+        else{
+            this.root = new Node(value);
         }
     }
+print(){
+    console.log(this.root);
+
 }
+}
+
+
+
+module.exports = {BinarySearchTree,BinaryTree, Node};
