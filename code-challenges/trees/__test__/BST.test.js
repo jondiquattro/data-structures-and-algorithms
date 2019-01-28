@@ -245,10 +245,11 @@ xdescribe( 'BinarySearchTree Class should contain the add method that does the f
 
         it('should add a node to an empty tree', ()=>{
             let tree = new Tree.BinarySearchTree();
-            tree.add(4);
+            tree.add(4);//
 
             console.log(tree);
             expect(tree.root.value).toEqual(4);
+            //small change
 
         })
 
