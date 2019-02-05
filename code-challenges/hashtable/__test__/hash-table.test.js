@@ -39,11 +39,18 @@ describe('hash tables class should have the following methods', ()=>{
 
     //     })
     describe('chaining should take in a a value, and return a linkedlist with value at the head',()=>{
-        it('should create a new insatnce of linkedlist', ()=>{
+        it('should create a new instance of linkedlist with a value', ()=>{
 
             let Hash = new HashTable(6);
             let result = Hash.chaining('George');
-            console.log(result.head.value)
+            
+            expect(result.head.value).toEqual('George');
+        })
+        it('should return a new instance of linkedlist with a node value of what was passed as a value', ()=>{
+
+            let Hash = new HashTable(6);
+            let result = Hash.chaining('George');
+            
             expect(result.head.value).toEqual('George');
         })
     })
