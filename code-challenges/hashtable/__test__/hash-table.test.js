@@ -34,10 +34,6 @@ describe('hash tables class should have the following methods', ()=>{
         })
     })
 
-    // describe('Set should take in a key and a value, hash the key and add the key and value to the this.map[hash]')
-    //     it('should check for an empty bucket', ()=>{
-
-    //     })
     describe('chaining should take in a a value, and return a linkedlist with value at the head',()=>{
         it('should create a new instance of linkedlist with a value', ()=>{
 
@@ -46,12 +42,26 @@ describe('hash tables class should have the following methods', ()=>{
             
             expect(result.head.value).toEqual('George');
         })
-        it('should return a new instance of linkedlist with a node value of what was passed as a value', ()=>{
+  
+    })
 
-            let Hash = new HashTable(6);
-            let result = Hash.chaining('George');
-            
-            expect(result.head.value).toEqual('George');
+    describe('Set should take a key and valu pair, check the map array and either insert or cahin to map[hash].head',()=>{
+        it('should take in a key and value and create a new linked list if there is no collision',()=>{
+            let Hash = new HashTable(1);
+
+            //test with multiple hash 
+            // let result = Hash.set("Ringo", "drummer");
+
+            Hash.set("Ringo", "drummer");
+            Hash.set("George", "bass");
+            Hash.set("Paul", "lead guitar");
+            Hash.set("John", "rythm guitar");
+
+
+
+            console.log(Hash);
+
+
         })
     })
 
