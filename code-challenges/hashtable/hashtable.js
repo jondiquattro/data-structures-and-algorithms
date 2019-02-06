@@ -1,149 +1,71 @@
-'use strict'
-const util = require('util');
+'use strict';
+const LinkedList = require('../linkedList/single-linked-list/linked-list');
 
-// module.exports = {Node, LinkedList};
+class HashMap {
 
+    constructor(size) {
 
-console.log('hooked up')
-class Node {
-    constructor(value){
-
-        this.value = value;
-        this.next = null;
-    }
-}
-
-
-
-class LinkedList{
-    constructor(){
-        this.head = null;
+        this.size = size;
+        this.map = new Array(size);
     }
 
-    add(value){
-        let node = new Node(value);
 
-        if(!this.head){
-        this.head = node;
-        return;
+    //turns key into a hash number between 0 - this.size
+    hash(key) {
+        if(typeof(key)!== "string"){
+            let t = new TypeError();
+            return t;
+            
+        }
+        else{
+            let keyArr = key.split('');
+            let accum = null;
+            keyArr.forEach((charVal => { accum += charVal.charCodeAt(0) }))
+            return accum % this.size;
         }
 
-        let current = this.head;
-        while(current.next){
+
+    }
+
+    set(key, value) {
+        //turns name into an index
+        let hash = this.hash(key);
         
-            current = current.next;
-        }
-        current.next = node;
-    }
-    insert(value){
-        let node = new Node(value);
-        node.next = this.head;
-        this.head = node;
-        }
+        //creates a new linked list
+        // if (!this.map[hash]) { this.map[hash] = []; }
+        // this.map[hash].push({ [key]: value })
 
-    includes(target){
-        let current = this.head;
-        let value = current.value;
-        while(current.next){
-            if(target === value){
-                // target = true;
-                break;
-            }
-            current = current.next;
-        }
-        if(target ===value){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
-    print(){
-        let current = this.head;
-        while(current.next){
-            console.log(current.value);
-            current = current.next;
-        }
-    }
 
-    append(value){
-        let current = this.head;
-        while(current.next){
-            current = current.next;
-        }
-        let newNode = new Node(value)
-        current.next = newNode;
-        newNode.next = null;
+        if(!this.map[hash]){this.map[hash]=this.chaining(key,value)}
+        this.map[hash].append({key:key,value:value})
+    }
+    //takes a string
+    has(value) {
+        // console.log(this.map[this.hash(value)])
+        return (this.map[this.hash(value)] ? true : false)
+
 
     }
-    insertAfter(value, newValue){
-        let current = this.head;
-        while(current.next){
-          
-            if(current.value === value){
-            //   console.log('entered')
-                break;
-            }
-            current = current.next;
-        }
-        if(current.next ===null){
-            console.log('value not found')
-        }
-        else{
-            let newNode = new Node(newValue);
-            newNode.next = current.next;
-            current.next = newNode;
-        }
-
-    }
-    insertBefore(value, newValue){
-        let current = this.head;
-        while(current.next){
-          
-            if(current.next.value === value){
-              console.log('entered')
-                break;
-            }
-            current = current.next;
-        }
-        if(current.next ===null){
-                console.log('value not found')
-            }
-            else{
-                let newNode = new Node(newValue);
-                newNode.next = current.next;
-                current.next = newNode;
-            }
-    }
-    getValue(k){
-        let current = this.head;
-        let length = 0;
-        while(current.next){
-            length ++;
-            current = current.next;
-        };
-        let target = length - k;
-        current = this.head;
-        let cnt = 0;
-        while(cnt < target){
-            current = current.next;
-            cnt ++;
-        }
-        return current.next.value
+    chaining(key,value){
+        
+        //creates a new instance of LL
+        let head = new LinkedList();
+        //adds key and value to LL
+        head.add({key:key,value:value})
+        
+        return head;
     }
 }
 
-let list = new LinkedList();
-list.add('James');
-list.add('cathy');
-list.add('Zach');
-list.add('3');
-list.add(5);
+// let myHash = new HashMap(1044);
 
-console.log(list.getValue(3));
+// myHash.set('John', 'dad');
+// myHash.set('Cathy', 'mom');
+// myHash.set('Zach', 'Son');
+// myHash.set('Allie', 'daughter');
+// myHash.set('lAlie', 'duh');
 
-// console.log(list.includes('John'));
-// list.insertBefore('cathy', 7)
-    console.log(list);
+// console.log(myHash.has('lAlie'));
 
-    module.exports = {LinkedList,Node};
+
+module.exports = HashMap;
