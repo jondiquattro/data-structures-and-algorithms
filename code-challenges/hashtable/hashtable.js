@@ -23,49 +23,47 @@ class HashMap {
             keyArr.forEach((charVal => { accum += charVal.charCodeAt(0) }))
             return accum % this.size;
         }
-
-
     }
 
     set(key, value) {
+        
+        if (typeof(key) !== 'string'){
+        return 'error key must be a string';
+        }
         //turns name into an index
         let hash = this.hash(key);
-        
-        //creates a new linked list
-        // if (!this.map[hash]) { this.map[hash] = []; }
-        // this.map[hash].push({ [key]: value })
 
-
-        if(!this.map[hash]){this.map[hash]=this.chaining(key,value)}
-        this.map[hash].append({key:key,value:value})
+        if(!this.map[hash]){
+            this.map[hash]=new LinkedList
+        }
+        this.map[hash].add({key:key,value:value})
+    
     }
     //takes a string
-    has(value) {
-        // console.log(this.map[this.hash(value)])
-        return (this.map[this.hash(value)] ? true : false)
-
-
+    contains(key) {
+        if (typeof(key) !== 'string'){
+            return 'error key must be a string';
+            }
+        return (this.map[this.hash(key)] ? true : false)
     }
-    chaining(key,value){
+
+    get(key){
         
-        //creates a new instance of LL
-        let head = new LinkedList();
-        //adds key and value to LL
-        head.add({key:key,value:value})
-        
-        return head;
+        if(!this.contains(key)) return null;
+        let node = this.map[this.hash(key)].head
+        if(node.next){
+            let current = node;
+            while(current.next){
+                if(current.value.key === key) return current.value.value;
+                current = current.next;
+            }
+        }
+        else{
+            return this.map[this.hash(key)].head.value.value;
+        }
     }
+
 }
-
-// let myHash = new HashMap(1044);
-
-// myHash.set('John', 'dad');
-// myHash.set('Cathy', 'mom');
-// myHash.set('Zach', 'Son');
-// myHash.set('Allie', 'daughter');
-// myHash.set('lAlie', 'duh');
-
-// console.log(myHash.has('lAlie'));
-
+//finished testing
 
 module.exports = HashMap;
