@@ -116,6 +116,27 @@ class LinkedList{
             }
     }
 
+    itertate(node){
+
+
+        function _walk(node){
+
+            if(node.next){
+                console.log(node.value)
+
+                 _walk(node.next)
+            
+            }
+                else{
+                    console.log(node.value)
+                    return node;
+                }
+
+        }
+
+        _walk(node);
+    }
+
 }
 
 // let list = new LinkedList();
