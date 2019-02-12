@@ -8,7 +8,7 @@ class Node {
     }
 }
 
-module.exports = class Graph{
+class Graph{
   constructor(){
     this._adjacencyList = new Map();
   }
@@ -36,8 +36,75 @@ module.exports = class Graph{
     
     return [...this._adjacencyList.get(node)];
   }
+
+  breadthSearch(node){
+    let breadth = [];
+    let result = [];
+    breadth.push(node);
+    // console.log(breadth)
+
+    while(breadth.length){
+
+      // console.log(result);
+      let cur = breadth.pop();
+      console.log('current',cur);
+
+      if(!cur.touched) {result.push(cur);}
+      cur.touched = true;
+      console.log('result',result)
+      
+      let neighbors = this.getNeighbors(cur);
+      // console.log(result)
+
+      if(neighbors.length){
+        for (let i = 0; i<neighbors.length; i++){
+          breadth.push(neighbors[i]);
+        }
+  
+      }//end if
+          
+        }
+    return result;
+      
+    }
+
+
+  
 };
 
 
+let graph = new Graph();
+let a = new Node('A')
+let b = new Node('B')
+let c = new Node('C')
+let d = new Node('D')
+let e = new Node('E')
+let f = new Node('F')
 
-// module.exports = Graph;
+
+
+graph.addNode(a);
+graph.addNode(b);
+graph.addNode(c);
+graph.addNode(d);
+graph.addNode(e);
+graph.addNode(f);
+
+graph.addEdge(a,b);
+graph.addEdge(a,c);
+
+graph.addEdge(b,c);
+graph.addEdge(b,e);
+
+graph.addEdge(c,f);
+
+// console.log(graph.getNeighbors(a));
+console.log(graph.breadthSearch(e))
+
+
+
+
+
+
+
+
