@@ -132,4 +132,15 @@ describe('Graph should consist of addNode(), addEdge(), getNodes(), get neighbor
 
         })
     })
+    describe('get nodes should return all the nodes in the graph as a collection',()=>{
+        
+        it('should return the nodes in the graph', ()=>{
+
+            const Graph = new GraphClass();
+            Graph.addNode(a);
+            Graph.addNode(b);
+            Graph.addNode(c);
+            Graph.getNodes();
+        })
+    })
 })
