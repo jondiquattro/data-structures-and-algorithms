@@ -145,24 +145,22 @@ Return the resulting output array.
 ------------------------------------------------------------------------------------------------ */
 
 const fizzbuzz = (arr) => {
-  // Solution code here...
-  const output=[];
-  arr.forEach((arr)=>{
-    
-    if((arr%3===0) && !(arr%5===0)){
-      output.push('Fizz');
-      }
-    else if(arr%5 ===0){
-      output.push('Buzz');
+  const result =[];
+  arr.forEach(idx=>{
+    if((idx%5===0)&&(idx%3===0)){
+      result.push('Fizz Buzz')
     }
-    else if((arr%5===0) ||(arr%3===0)){
-      output.push("Fizz Buzz");
+    else if(idx%3===0){
+      result.push('Fizz')
+    }
+    else if(idx%5===0){
+      result.push('Buzz')
     }
     else{
-      output.push(arr);
+      result.push(idx);
     }
   })
-  return output;
+  return result;
 }
 
 
@@ -217,11 +215,11 @@ xdescribe('Testing challenge 6', () => {
   });
 });
 
-describe('Testing challenge 7', () => {
+xdescribe('Testing challenge 7', () => {
   const inputs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
 
   test('It should print out messages or numbers', () => {
     expect(fizzbuzz(inputs)).toStrictEqual([1, 2, 'Fizz', 4, 'Buzz', 'Fizz', 7, 8, 'Fizz', 'Buzz', 11, 'Fizz', 13, 14, 'Fizz Buzz', 16]);
     expect(fizzbuzz(inputs).length).toStrictEqual(16);
-  });
+  });jest
 });
