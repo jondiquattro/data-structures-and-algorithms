@@ -7,16 +7,11 @@ Then, write a function named speaker that takes in a string and a callback funct
 ------------------------------------------------------------------------------------------------ */
 
 const greeting = (word) => {
-  // Solution code here...
   return word.toUpperCase();
 }
 
-const speaker = (message, callback) => {
-  // Solution code here...
-    greeting = (word) =>{
-    return greeting(message);
-  }
-}
+const speaker = (message, callback) =>callback(message)
+
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 2
@@ -30,14 +25,12 @@ Within the addNumbers function, invoke the callback function as many times as ne
 Return the modified array.
 ------------------------------------------------------------------------------------------------ */
 
-const addValues = (arr, value) => {
-  arr.push().value;
-}
+const addValues = (arr, value) => arr.push(value)
+
 
 const addNumbers = (num, arr, times, callback) => {
-  for(var i; i < times; i++){
-    addValues(num,arr);
-  }
+  for(var i=0; i < times; i++){
+    callback(arr, num)}
   return arr;
 }
 
@@ -50,11 +43,14 @@ Return the modified array.
 ------------------------------------------------------------------------------------------------ */
 
 const removeOne = (num, arr) => {
-  // Solution code here...
+  if(num%3===2){
+    // console.log('popped')
+    arr.pop();
+  }
 }
 
-const removeElements = (arr, callback) => {
-  // Solution code here...
+const removeElements = (arr, callback) => {arr.forEach(idx=>{callback(idx,arr)})
+  return arr;
 }
 
 /* ------------------------------------------------------------------------------------------------
@@ -63,7 +59,8 @@ Write a function named removeWithForEach that produces the same output as challe
 ------------------------------------------------------------------------------------------------ */
 
 const removeWithForEach = (arr, callback) => {
-  // Solution code here...
+  arr.forEach(idx=>{callback(idx,arr)})
+  return arr;
 }
 
 /* ------------------------------------------------------------------------------------------------
@@ -74,7 +71,11 @@ This anonymous function should accept up to three arguments: the element, the in
 ------------------------------------------------------------------------------------------------ */
 
 const removeWithAnon = (arr) => {
-  // Solution code here...
+  arr.forEach( function(e, idx, arr){
+    removeOne(e, arr)
+    return arr;
+  })
+  return arr;
 }
 
 /* ------------------------------------------------------------------------------------------------
@@ -92,7 +93,13 @@ This function should use forEach to populate your grocery list based on the stor
 ------------------------------------------------------------------------------------------------ */
 
 const createList = (availableItems) => {
-  // Solution code here...
+  const list =[];
+  availableItems.forEach(idx=>{
+    if(idx.available === true){
+      list.push(idx.name)
+    }
+  })
+  return list;
 }
 
 /* ------------------------------------------------------------------------------------------------
@@ -107,7 +114,22 @@ Return the resulting output array.
 ------------------------------------------------------------------------------------------------ */
 
 const fizzbuzz = (arr) => {
-  // Solution code here...
+  const result =[];
+  arr.forEach(idx=>{
+    if((idx%5===0)&&(idx%3===0)){
+      result.push('Fizz Buzz')
+    }
+    else if(idx%3===0){
+      result.push('Fizz')
+    }
+    else if(idx%5===0){
+      result.push('Buzz')
+    }
+    else{
+      result.push(idx);
+    }
+  })
+  return result;
 }
 
 /* ------------------------------------------------------------------------------------------------
@@ -123,7 +145,7 @@ xdescribe('Testing challenge 1', () => {
   });
 });
 
-describe('Testing challenge 2', () => {
+xdescribe('Testing challenge 2', () => {
   test('It should add the number 8 to the array five times', () => {
     expect(addNumbers(8, [], 5, addValues)).toStrictEqual([8, 8, 8, 8, 8]);
     expect(addNumbers(8, [], 5, addValues).length).toStrictEqual(5);

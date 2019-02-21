@@ -25,7 +25,6 @@ const isNum = (input) => {
   else if(testNum ==false) {
     flag = false;
   }
-  console.log(flag);
   return flag;
 
 };
@@ -47,11 +46,8 @@ const isCapitalized = (str) => {
 
   let flag = false;
 
-//  console.log(testStr);
-  //  console.log(str.match(capRegex));
-   
    const arr=str.match(capRegex); 
-   console.log(arr);
+
 
   return arr;
   
@@ -83,7 +79,28 @@ Do not use the vertical bar (pipe) in your pattern.
 ------------------------------------------------------------------------------------------------ */
 
 const matchMonth = (input) => {
-  input.toLower();
+  let reg = /oct/;
+  let num = /[0-9]/;
+  let long = /october/;
+  let caps =/[A-Z]/;
+  
+
+  if(num.test(input)|| caps.test(input[1])){
+    return false;
+  }
+  else if(long.test(input.toLowerCase()) && (input.length < 8)){
+  
+      return true;
+    
+    }
+  else if ((reg.test(input.toLowerCase())) && (input.length<4)  ){
+    return true;
+  }
+
+  else{
+    return false;
+  }
+
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -94,7 +111,15 @@ The expected output of "Hello, and have a wonderful day!" is ["and ", "have ", "
 ------------------------------------------------------------------------------------------------ */
 
 const noPunctuation = str => {
-  // Solution code here...
+ let result = [];
+ let x = str.split(/\s/);
+
+ x.forEach( idx =>{
+   if(/[a-z]|[A-Z]/.test(idx[idx.length -1])){
+    result.push(idx + ' ')
+   }
+ })
+ return result;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -106,7 +131,7 @@ For example, 'Welcome to Code 301!' will return 'W_lc_m_ t_ C_d_ 301!'.
 ------------------------------------------------------------------------------------------------ */
 
 let hangman = (str) => {
-  // Solution code here...
+ return str.replace(/[aeiouAEIOU]/g, '_')
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -119,7 +144,13 @@ Hint: All of these words end with the letters "ells".
 const seashells = 'She sells seashells by the seashore. The shells she sells are surely seashells. So if she sells shells on the seashore, I\'m sure she sells seashore shells.';
 
 const findShells = (str) => {
-  // Solution code here...
+  const result = [];
+ str.split(/\s/).forEach(idx=>{
+   if(/ells/.test(idx)){
+     result.push(idx.replace(/\W/, ''))
+   }
+ })
+  return result;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -152,7 +183,7 @@ xdescribe('Testing challenge 2', () => {
   });
 });
 
-describe('Testing challenge 3', () => {
+xdescribe('Testing challenge 3', () => {
   let cities = ['Cleveland', 'San Diego', 'Birmingham', 'Seattle', 'Miami', 'New York City', 'Omaha', 'Portland', 'Austin', 'Boston', 'Newport Beach', 'Hoboken'];
 
   test('It should return the cities whose names begin with the letters A through J', () => {

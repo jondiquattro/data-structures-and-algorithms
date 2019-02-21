@@ -220,7 +220,7 @@ Run your tests from the console: jest challenges-07.test.js
 
 ------------------------------------------------------------------------------------------------ */
 
-describe('Testing challenge 1', () => {
+xdescribe('Testing challenge 1', () => {
   test('It should return two raised to the power of the integer', () => {
     expect(forLoopTwoToThe([0, 4, 5])).toStrictEqual([1, 16, 32]);
     expect(forLoopTwoToThe([0, 4, 5]).length).toStrictEqual(3);
@@ -231,7 +231,7 @@ describe('Testing challenge 1', () => {
   });
 });
 
-describe('Testing challenge 2', () => {
+xdescribe('Testing challenge 2', () => {
   test('It should return two raised to the power of the integer', () => {
     expect(forEachTwoToThe([0, 4, 5])).toStrictEqual([1, 16, 32]);
     expect(forEachTwoToThe([0, 4, 5]).length).toStrictEqual(3);
@@ -242,7 +242,7 @@ describe('Testing challenge 2', () => {
   });
 });
 
-describe('Testing challenge 3', () => {
+xdescribe('Testing challenge 3', () => {
   test('It should return two raised to the power of the integer', () => {
     expect(mapTwoToThe([0, 4, 5])).toStrictEqual([1, 16, 32]);
     expect(mapTwoToThe([0, 4, 5]).length).toStrictEqual(3);
@@ -253,7 +253,7 @@ describe('Testing challenge 3', () => {
   });
 });
 
-describe('Testing challenge 4', () => {
+xdescribe('Testing challenge 4', () => {
   test('It should return an array containing the character code for each letter', () => {
     expect(charCode(['C', 'o', 'd', 'e', '3', '0', '1'])).toStrictEqual([ 67, 111, 100, 101, 51, 48, 49 ]);
     expect(charCode(['C', 'o', 'd', 'e', '3', '0', '1']).length).toStrictEqual(7);
