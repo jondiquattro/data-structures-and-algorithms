@@ -23,7 +23,7 @@ if (!direct){
     if(edges.length === arr.length){
         direct = true;
         for (let i = 0; i<edges.length; i++){
-            total += edges.weigth
+            total += edges.weight
         }
     }
 }

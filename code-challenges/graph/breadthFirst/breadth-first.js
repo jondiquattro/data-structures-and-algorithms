@@ -1,31 +1,89 @@
 'use strict';
-breadthSearch(node){
-    let breadth = [];
-    let result = [];
-    breadth.push(node);
-    // console.log(breadth)
 
-    while(breadth.length){
+class Graph{
 
-      // console.log(result);
-      let cur = breadth.pop();
-      console.log('current',cur);
 
-      if(!cur.touched) {result.push(cur);}
-      cur.touched = true;
-      console.log('result',result)
-      
-      let neighbors = this.getNeighbors(cur);
-      // console.log(result)
-
-      if(neighbors.length){
-        for (let i = 0; i<neighbors.length; i++){
-          breadth.push(neighbors[i]);
-        }
-  
-      }//end if
-          
-        }
-    return result;
-      
+    constructor(){
+        this.vertices = [];
+        this.adjList = {};
     }
+
+
+    addNode(vertex){
+        this.vertices.push(vertex);
+        this.adjList[vertex]={value:vertex, edges:[], discovered: false, explored: false};
+    }
+
+    addEdge(startNode,endNode,options){
+        let weight= null;
+        (options[0]) ? weight = option[0]:weight = '';
+        this.adjList[startNode].edges.push(endNode);
+        if(options[1]==='undirected'){this.adjList[endNode].edges.push(startNode);}
+
+    }
+    getEdges(node){
+        // console.log(node)
+        // console.log('from getEdges', this.adjList[node].edges)
+        // console.log(this.adjList[node].edges);
+    return this.adjList[node].edges;
+}
+
+    BFS(start, end){
+        //queue of nodes
+        let Q = [this.adjList[start]];
+        while(Q.length){
+            
+            let cur = Q.shift();
+            if(!cur.explored){
+
+             cur.discovered = true;
+            let edges = this.getEdges(cur.value);
+            // console.log(edges);
+
+            for(let i in edges){
+
+            if(!this.adjList[edges[i]].discovered){
+
+                this.adjList[edges[i]].discovered = true;
+                Q.push(this.adjList[edges[i]]);
+            }
+            }
+            this.adjList[cur.value].explored = true;
+
+            }//end if 
+            if(cur.explored){
+                console.log(cur.value);
+            }
+        }//end while loop Q empty
+          
+
+    }
+    toString(){
+        const result = [];
+        let str ='';
+        for(let i =0; i<this.vertices.length; i++){
+            str += this.vertices[i] + ' -> ';
+            let neighbors = this.adjList[this.vertices[i]].edges;
+            for (var j =0; j<neighbors.length; j++){
+                str += neighbors[j] + ' ';
+                // result.push(str);
+            }
+            result.push(str);
+
+            str = ''
+
+        }
+        return result;
+    }
+}
+
+const graph = new Graph();
+const myVerts = ['A','B','C','D','E','F','G','H','I'];
+
+for(let i in myVerts){
+    graph.addNode(myVerts[i]);
+}
+
+
+
+module.exports = Graph;
