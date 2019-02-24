@@ -1,5 +1,3 @@
-'use strict';
-
 class Graph{
 
 
@@ -22,9 +20,6 @@ class Graph{
 
     }
     getEdges(node){
-        // console.log(node)
-        // console.log('from getEdges', this.adjList[node].edges)
-        // console.log(this.adjList[node].edges);
     return this.adjList[node].edges;
 }
 
@@ -76,14 +71,3 @@ class Graph{
         return result;
     }
 }
-
-const graph = new Graph();
-const myVerts = ['A','B','C','D','E','F','G','H','I'];
-
-for(let i in myVerts){
-    graph.addNode(myVerts[i]);
-}
-
-
-
-module.exports = Graph;

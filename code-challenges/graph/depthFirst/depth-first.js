@@ -1,82 +1,70 @@
-const Graph = require('../graph');
+class Graph {
 
 
-class Node {
-    constructor(value) {
-
-        this.value = value;
+    constructor() {
+        this.vertices = [];
+        this.adjList = {};
     }
-}
-function depthFirst(graph, start){
-    let visited ={};
-    let result = [];
-    let list = graph.hash;
+    addNode(vertex) {
+        this.vertices.push(vertex);
+        this.adjList[vertex] = { value: vertex, edges: [], discovered: false, explored: false };
+    }
 
-    let _walk = (vertex)=>{
-        if(!vertex){return null;}
+    addEdge(startNode, endNode, options) {
+        let weight = null;
+        (options[0]) ? weight = option[0] : weight = '';
+        this.adjList[startNode].edges.push(endNode);
+        if (options[1] === 'undirected') { this.adjList[endNode].edges.push(startNode); }
 
-        visited[vertex]=true;
-        result.push(vertex);
-        console.log(list)
+    }
+    getEdges(node) {
 
-        for(let i=0; i<list[vertex].length; i++){
-            if(!visited[vertex[i]]){
-                return _walk(virtex[i])
+        return this.adjList[node].edges;
+    }
+
+    DFS(start, end) {
+        //queue of nodes
+        let Q = [this.adjList[start]];
+        while (Q.length) {
+
+            let cur = Q.pop();
+            if (!cur.explored) {
+
+                cur.discovered = true;
+                let edges = this.getEdges(cur.value);
+                for (let i in edges) {
+
+                    if (!this.adjList[edges[i]].discovered) {
+
+                        this.adjList[edges[i]].discovered = true;
+                        Q.push(this.adjList[edges[i]]);
+                    }
+                }
+                this.adjList[cur.value].explored = true;
+
+            }//end if 
+            if (cur.explored) {
+                console.log(cur.value);
             }
-        }
+        }//end while loop Q empty
+
 
     }
-    _walk(start);
-    return result;
+    toString() {
+        const result = [];
+        let str = '';
+        for (let i = 0; i < this.vertices.length; i++) {
+            str += this.vertices[i] + ' -> ';
+            let neighbors = this.adjList[this.vertices[i]].edges;
+            for (var j = 0; j < neighbors.length; j++) {
+                str += neighbors[j] + ' ';
+                // result.push(str);
+            }
+            result.push(str);
+
+            str = ''
+
+        }
+        return result;
+    }
 }
-
-let a = new Node('A');
-let b = new Node('B');
-let c = new Node ('C');
-let d = new Node ('D');
-let e = new Node ('E');
-let f = new Node ('F');
-let g = new Node ('G');
-let h = new Node ('H');
-
-
-
-const graph = new Graph(20);
-
-graph.addNode(a);
-graph.addNode(b);
-graph.addNode(c);
-graph.addNode(d);
-graph.addNode(e);
-graph.addNode(f);
-graph.addNode(g);
-
-
-graph.addEdge(a,b);
-graph.addEdge(a,d);
-
-graph.addEdge(b,a)
-graph.addEdge(b,d)
-graph.addEdge(b,c)
-graph.addEdge(c,g)
-
-
-graph.addEdge(d,a)
-graph.addEdge(d,b)
-graph.addEdge(d,e)
-graph.addEdge(d,f)
-graph.addEdge(d,h)
-
-
-graph.addEdge(e,d)
-
-graph.addEdge(f,d)
-
-graph.addEdge(f,h)
-
-
-depthFirst(graph,a.value);
-
-
-
-
